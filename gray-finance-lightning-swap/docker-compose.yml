@@ -10,11 +10,11 @@ services:
       - ${REDIS_PASS}
       - --appendonly yes
     volumes:
-      - ./data/redis:/data
+      - ${APP_DATA_DIR}/data/redis:/data
 
   frontend:
     image: lightning-swap-frontend:latest
-    build: ./frontend
+    build: ${APP_DATA_DIR}/frontend
     container_name: lightning-swap-frontend
     ports:
       - 4173:4173
@@ -26,7 +26,7 @@ services:
 
   backend:
     image: lightning-swap-backend:latest
-    build: ./backend
+    build: ${APP_DATA_DIR}/backend
     container_name: lightning-swap-backend
     ports:
       - 1536:1536
@@ -52,7 +52,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - ./data/backend/database.db:/root/vinci/data/database.db
-      - ./backend:/app
+      - ${APP_DATA_DIR}/data/backend/database.db:/root/vinci/data/database.db
+      - ${APP_DATA_DIR}/backend:/app
     restart: on-failure
     stop_grace_period: 1m
