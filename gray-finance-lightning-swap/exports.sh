@@ -38,7 +38,7 @@ if [  -z ${SWAP_MAX_AMOUNT+x} ]; then
     export SWAP_MAX_AMOUNT=100000000
 fi
 
-export LNBITS_HOST="http://host.docker.internal:"${APP_LNBITS_PORT}"/api"
+export LNBITS_HOST="http://host.docker.internal:3007/api"
 export LNBITS_WEBHOOK_URL="http://${APP_LN_SWAP_BACKEND_IP}:1536/api/v1/lnbits/webhook"
 
 if [ -z ${LNBITS_MAIN_WALLET_ADMIN_KEY+x} ]; then
