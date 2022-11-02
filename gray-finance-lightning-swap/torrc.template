@@ -1,0 +1,2 @@
+HiddenServiceDir /data/app-$APP_ID
+HiddenServicePort 5173 $APP_LN_SWAP_FRONTEND_IP:5173
