@@ -1,11 +1,11 @@
 {
-  "name": "init",
+  "name": "ln-swap",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "cross-env NODE_OPTIONS='--max-old-space-size=10240' vite build",
+    "build": "cross-env NODE_OPTIONS='--max-old-space-size=1024' vite build",
     "preview": "vite preview"
   },
   "dependencies": {
