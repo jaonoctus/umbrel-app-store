@@ -22,6 +22,9 @@ services:
       - VITE_VINCENT_BACKEND_TOR=${VITE_VINCENT_BACKEND_TOR}
       - VITE_VINCENT_BACKEND=${VITE_VINCENT_BACKEND}
       - VITE_TITLE=${VITE_TITLE}
+    networks:
+      default:
+        ipv4_address: $APP_LN_SWAP_FRONTEND_IP
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
@@ -52,6 +55,9 @@ services:
 
       - LNBITS_SPLIT_WALLET_ADMIN_KEY=${LNBITS_SPLIT_WALLET_ADMIN_KEY}
       - LNBITS_SPLIT_WALLET_INVOICE_KEY=${LNBITS_SPLIT_WALLET_INVOICE_KEY}
+    networks:
+      default:
+        ipv4_address: $APP_LN_SWAP_BACKEND_IP
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
