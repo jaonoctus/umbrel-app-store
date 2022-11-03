@@ -6,7 +6,10 @@ touch ${EXPORTS_APP_DIR}/.env
 export $(grep -v '^#' ${EXPORTS_APP_DIR}/.env | xargs) >> /dev/null 2>&1 
 
 export APP_LN_SWAP_BACKEND_IP=10.21.21.38
+export APP_LN_SWAP_BACKEND_PORT=1536
+
 export APP_LN_SWAP_FRONTEND_IP=10.21.21.65
+export APP_LN_SWAP_FRONTEND_PORT=1536
 
 export VITE_VINCENT_BACKEND=http://${UMBREL_HOST}:1536
 export VITE_TITLE="LN Swap"
