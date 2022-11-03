@@ -42,7 +42,7 @@ if [  -z ${SWAP_MAX_AMOUNT+x} ]; then
 fi
 
 export LNBITS_HOST="http://host.docker.internal:3007/api"
-export LNBITS_WEBHOOK_URL="http://${APP_LN_SWAP_BACKEND_IP}:1536/api/v1/lnbits/webhook"
+export LNBITS_WEBHOOK_URL="http://${APP_LN_SWAP_BACKEND_IP}:${APP_LN_SWAP_BACKEND_PORT}/api/v1/lnbits/webhook"
 
 if [ -z ${LNBITS_MAIN_WALLET_ADMIN_KEY+x} ]; then
     LNBITS_WALLET_URL=$(curl -X GET --head --silent --write-out "%{redirect_url}\n" --output /dev/null http://${UMBREL_HOST}:3007/wallet?nme=default)
@@ -53,6 +53,8 @@ if [ -z ${LNBITS_MAIN_WALLET_ADMIN_KEY+x} ]; then
     LNBITS_MAIN_WALLET_INVOICE_KEY=$(echo $LNBITS_WALLET_KEYS | jq .inkey)
 
     echo $LNBITS_WALLET_URL > ${EXPORTS_APP_DIR}/lnbits.url
+    
+    echo "LNBITS_HOST=${LNBITS_HOST}" >> ${EXPORTS_APP_DIR}/.env
     echo "LNBITS_MAIN_WALLET_ADMIN_KEY=${LNBITS_MAIN_WALLET_ADMIN_KEY}" >> ${EXPORTS_APP_DIR}/.env
     echo "LNBITS_MAIN_WALLET_INVOICE_KEY=${LNBITS_MAIN_WALLET_INVOICE_KEY}" >> ${EXPORTS_APP_DIR}/.env
 fi
