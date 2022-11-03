@@ -13,7 +13,10 @@ export default defineConfig({
     port: 5173
   },
   build: {
-    minify: false,
     sourcemap: false,
+    commonjsOptions: {
+      sourceMap: false,
+    },
+    minify: true,
   },
 })
