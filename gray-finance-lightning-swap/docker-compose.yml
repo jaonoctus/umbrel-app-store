@@ -1,6 +1,12 @@
 version: "3.7"
 
 services:
+  app_proxy:
+    environment:
+      APP_HOST: ${APP_LN_SWAP_FRONTEND_IP}
+      APP_PORT: 5173
+      PROXY_AUTH_ADD: "false"
+  
   redis:  
     image: redis:latest
     command: 
