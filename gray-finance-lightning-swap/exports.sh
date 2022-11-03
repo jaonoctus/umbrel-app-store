@@ -53,3 +53,9 @@ if [ -z ${LNBITS_MAIN_WALLET_ADMIN_KEY+x} ]; then
     echo "LNBITS_MAIN_WALLET_ADMIN_KEY=${LNBITS_MAIN_WALLET_ADMIN_KEY}" >> ${EXPORTS_APP_DIR}/.env
     echo "LNBITS_MAIN_WALLET_INVOICE_KEY=${LNBITS_MAIN_WALLET_INVOICE_KEY}" >> ${EXPORTS_APP_DIR}/.env
 fi
+
+backend_hidden_service_file="${EXPORTS_TOR_DATA_DIR}/app-${EXPORTS_APP_ID}-backend/hostname"
+frontend_hidden_service_file="${EXPORTS_TOR_DATA_DIR}/app-${EXPORTS_APP_ID}-frontend/hostname"
+
+export VITE_VINCENT_BACKEND_TOR="http://$(cat "${backend_hidden_service_file}" 2>/dev/null || echo "notyetset.onion")"
+export VITE_VINCENT_FRONTEND_TOR="http://$(cat "${frontend_hidden_service_file}" 2>/dev/null || echo "notyetset.onion")"
