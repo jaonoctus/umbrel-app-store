@@ -6,7 +6,7 @@ services:
       APP_HOST: ${APP_LN_SWAP_FRONTEND_IP}
       APP_PORT: 5173
       PROXY_AUTH_ADD: "false"
-  
+
   redis:  
     image: redis:latest
     command: 
@@ -22,8 +22,6 @@ services:
     image: lightning-swap-frontend:latest
     build: ${APP_DATA_DIR}/frontend
     container_name: lightning-swap-frontend
-    ports:
-      - 5173:5173
     environment:
       - VITE_TITLE=LN Swap
     networks:
