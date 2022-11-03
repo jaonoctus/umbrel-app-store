@@ -29,7 +29,9 @@ services:
         ipv4_address: $APP_LN_SWAP_FRONTEND_IP
     restart: on-failure
     stop_grace_period: 1m
-
+    depends_on:
+      - backend
+    
   backend:
     image: lightning-swap-backend:latest
     build: ${APP_DATA_DIR}/backend
@@ -66,7 +68,9 @@ services:
       - ${APP_DATA_DIR}/.env:/root/vinci/.env
     restart: on-failure
     stop_grace_period: 1m
-
+    depends_on:
+      - redis
+    
   tor:
     image: getumbrel/tor:0.4.7.8@sha256:2ace83f22501f58857fa9b403009f595137fa2e7986c4fda79d82a8119072b6a
     user: "1000:1000"
@@ -76,3 +80,6 @@ services:
       - ${TOR_DATA_DIR}:/data
     environment:
       HOME: "/tmp"
+    depends_on:
+      - backend
+      - frontend
