@@ -13,7 +13,7 @@ import Alert from "../../assets/alert.json";
 import "./styles.css"
 
 var VITE_VINCENT_BACKEND = window.location.protocol + "//" + window.location.hostname + ":1536"
-if (window.location.href.includes(".onion")) {
+if ((window.location.href.includes(".onion")) && (import.meta.env.VITE_VINCENT_BACKEND_TOR)) {
   VITE_VINCENT_BACKEND = import.meta.env.VITE_VINCENT_BACKEND_TOR
 } else {
   if (import.meta.env.VITE_VINCENT_BACKEND) {
