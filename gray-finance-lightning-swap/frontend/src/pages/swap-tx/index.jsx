@@ -67,8 +67,6 @@ function SwapTx() {
                 const data = r.data
                 setTx(data);
                 setStatus(data.status);
-            }).catch(() => {
-                setStatus("canceled")
             })
         }, 5000))
         return () => clearInterval(check_tx);
@@ -82,7 +80,7 @@ function SwapTx() {
         );
     }
     
-    if (( status === "reedem" )) {
+    if (status === "reedem") {
         return (
             <div className="container">
                 <Lottie loop={false} animationData={Alert} style={{ height: 350, width: 350 }} />
@@ -96,22 +94,7 @@ function SwapTx() {
             </div>
         )
     }
-
-    if ((status === "canceled"))  {
-        return (
-            <div className="container">
-                <Lottie loop={false} animationData={Canceled} style={{ height: 350, width: 350 }} />
-                <p> Your transaction has been cancelled. </p>
-                <button 
-                    className="button-go-back"
-                    onClick={() => navigate("/")}
-                >
-                    Go back
-                </button>
-            </div>
-        )
-    }
-
+    
     if (status === "settled") {
         return (
             <div className="container">
@@ -144,7 +127,7 @@ function SwapTx() {
         )
     }
 
-    if ((counter < -1)) {
+    if (counter < -1) {
         navigate("/")
     }
 
