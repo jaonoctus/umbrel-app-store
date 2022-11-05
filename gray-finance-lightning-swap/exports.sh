@@ -62,7 +62,7 @@ fi
 tor_hidden_service=$(cat "${EXPORTS_TOR_DATA_DIR}/app-${EXPORTS_APP_ID}/hostname")
 if [ -z ${MIRRORS_TOR_URL+x} ]; then
     export MIRRORS_TOR_URL="${tor_hidden_service}"
-    echo $MIRRORS_TOR_URL >> ${EXPORTS_APP_DIR}/.env
+    echo MIRRORS_TOR_URL="${MIRRORS_TOR_URL}" >> ${EXPORTS_APP_DIR}/.env
 fi
 
 echo $tor_hidden_service > tor.hostname
