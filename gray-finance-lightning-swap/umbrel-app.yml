@@ -20,4 +20,4 @@ gallery:
 dependencies:
   - lnbits
 path: ""
-port: 4351
+port: 4353
