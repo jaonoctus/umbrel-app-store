@@ -2,6 +2,9 @@
   <img src="https://i.imgur.com/QCg2rk5.png" alt="Logo">
   <p align="center"> A simple community app store 😄 </p>
   <p align="center">
+    <a href="https://legend.lnbits.com/tipjar/582">
+      <img src="https://img.shields.io/badge/Donate-Bitcoin-green.svg" />
+    </a>
     <a href="https://twitter.com/Gray_Finance">
       <img src="https://img.shields.io/twitter/follow/Gray_Finance?style=social" />
     </a>  
