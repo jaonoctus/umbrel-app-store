@@ -21,7 +21,6 @@ services:
   frontend:
     image: lightning-swap-frontend:latest
     build: ${APP_DATA_DIR}/frontend
-    container_name: lightning-swap-frontend
     environment:
       - VITE_TITLE=LN Swap
     networks:
@@ -35,7 +34,6 @@ services:
   backend:
     image: lightning-swap-backend:latest
     build: ${APP_DATA_DIR}/backend
-    container_name: lightning-swap-backend
     ports:
       - 1536:1536
     environment:
