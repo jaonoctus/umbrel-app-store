@@ -8,12 +8,12 @@ import requests
 import logging
 import sys
 
-if not (LNBITS_MAIN_WALLET_INVOICE_KEY):
-    if exists(PATH + "/wallet.json"):
-        wallet = load(open(PATH + "/wallet.json"))
+if not (LNBITS_MAIN_WALLET_ADMIN_KEY):
+    if exists(PATH + "/data/wallet.json"):
+        wallet = load(open(PATH + "/data/wallet.json"))
     else:
         wallet = {}
-    
+
     if not wallet:
         try:
             location = requests.get(f"{LNBITS_BASE_URL}/wallet?nme=default", allow_redirects=False).headers["Location"]
@@ -25,7 +25,7 @@ if not (LNBITS_MAIN_WALLET_INVOICE_KEY):
 
         LNBITS_MAIN_WALLET_ADMIN_KEY = wallet_keys["adminkey"]
         LNBITS_MAIN_WALLET_INVOICE_KEY = wallet_keys["inkey"]    
-        with open(PATH + "/wallet.json", "w") as w:
+        with open(PATH + "/data/wallet.json", "w") as w:
             wallet = {"LNBITS_MAIN_WALLET_ADMIN_KEY": LNBITS_MAIN_WALLET_ADMIN_KEY, "LNBITS_MAIN_WALLET_INVOICE_KEY": LNBITS_MAIN_WALLET_INVOICE_KEY}
             dump(wallet, w)
     else:
