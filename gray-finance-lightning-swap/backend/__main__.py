@@ -11,7 +11,6 @@ from services.lnd import lnd
 from configs import PATH, LNBITS_HOST
 from json import dumps
 
-import requests
 import logging
 import sys
 import api
