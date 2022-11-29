@@ -62,6 +62,7 @@ services:
       - ${APP_DATA_DIR}/data/backend/database.db:/root/vinci/data/database.db
       - ${APP_DATA_DIR}/backend:/app
       - ${APP_DATA_DIR}/.env:/root/vinci/.env
+      - ${APP_DATA_DIR}/wallet.json:/root/vinci/data/wallet.json
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
