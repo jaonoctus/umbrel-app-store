@@ -47,7 +47,7 @@ def create_invoice(amount: int, memo="", expiry=86400) -> dict:
 
     invoice = lnbits.create_invoice(amount, memo=memo, webhook=LNBITS_WEBHOOK_URL)
     if not invoice.get("payment_hash"):
-        return {"message": "There was a problem trying to create a new invoice."}
+        return {"message": invoice}
     
     # Get the hash payment.
     payment_hash = invoice["payment_hash"]
