@@ -42,8 +42,8 @@ export LNBITS_URL="http://${UMBREL_HOST}:3007"
 export LNBITS_HOST="http://host.docker.internal:3007/api"
 export LNBITS_WEBHOOK_URL="http://${APP_LN_SWAP_BACKEND_IP}:${APP_LN_SWAP_BACKEND_PORT}/api/v1/lnbits/webhook"
 
-tor_hidden_service_path=$(echo "${EXPORTS_TOR_DATA_DIR}/app-${EXPORTS_APP_ID}/hostname")
-if [[ -f "$tor_hidden_service" ]]; then
+tor_hidden_service_path=("${EXPORTS_TOR_DATA_DIR}/app-${EXPORTS_APP_ID}/hostname")
+if [[ -f $tor_hidden_service ]]; then
     tor_hidden_service=$(cat $tor_hidden_service_path)
     export MIRRORS_TOR_URL="http://${tor_hidden_service}"
     echo "MIRRORS_TOR_URL=${MIRRORS_TOR_URL}" >> ${EXPORTS_APP_DIR}/.env
