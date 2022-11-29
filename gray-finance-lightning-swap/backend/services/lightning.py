@@ -34,7 +34,8 @@ if not (LNBITS_MAIN_WALLET_ADMIN_KEY):
 
 lnbits = Lnbits(admin_key=LNBITS_MAIN_WALLET_ADMIN_KEY, invoice_key=LNBITS_MAIN_WALLET_INVOICE_KEY, url=LNBITS_HOST)
 try:
-    lnbits.get_wallet()
+    if (lnbits.get_wallet().get("detail")):
+        raise Exception("Wallet does not exist.")
 except:
     logging.critical("Unable to connect with Lnbits.")
     logging.critical("Exit")
