@@ -3,6 +3,10 @@
 UMBREL_HOST=$(echo $(hostname -s 2>/dev/null)".local")
 
 touch ${EXPORTS_APP_DIR}/.env
+if [ ! -f "${EXPORTS_APP_DIR}/wallet.json" ]; then
+    echo "{}" > "${EXPORTS_APP_DIR}/wallet.json"
+fi
+
 export $(grep -v '^#' ${EXPORTS_APP_DIR}/.env | xargs) >> /dev/null 2>&1 
 
 export APP_LN_SWAP_BACKEND_IP=10.21.21.38
@@ -40,6 +44,7 @@ fi
 
 export LNBITS_URL="http://${UMBREL_HOST}:3007"
 export LNBITS_HOST="http://host.docker.internal:3007/api"
+export LNBITS_BASE_URL="http://www.host.docker.internal:3007"
 export LNBITS_WEBHOOK_URL="http://${APP_LN_SWAP_BACKEND_IP}:${APP_LN_SWAP_BACKEND_PORT}/api/v1/lnbits/webhook"
 
 tor_hidden_service_path=("${EXPORTS_TOR_DATA_DIR}/app-${EXPORTS_APP_ID}/hostname")
