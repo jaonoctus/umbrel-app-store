@@ -50,6 +50,7 @@ services:
       - MIRRORS_TOR_URL=${MIRRORS_TOR_URL}
       
       - LNBITS_HOST=${LNBITS_HOST}
+      - LNBITS_BASE_URL=${LNBITS_BASE_URL}
       - LNBITS_WEBHOOK_URL=${LNBITS_WEBHOOK_URL}
       - LNBITS_MAIN_WALLET_ADMIN_KEY=${LNBITS_MAIN_WALLET_ADMIN_KEY}
       - LNBITS_MAIN_WALLET_INVOICE_KEY=${LNBITS_MAIN_WALLET_INVOICE_KEY}
@@ -62,6 +63,7 @@ services:
       - ${APP_DATA_DIR}/data/backend/database.db:/root/vinci/data/database.db
       - ${APP_DATA_DIR}/backend:/app
       - ${APP_DATA_DIR}/.env:/root/vinci/.env
+      - ${APP_DATA_DIR}/wallet.json:/root/vinci/data/wallet.json
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
