@@ -1,5 +1,32 @@
-from configs import LNBITS_HOST, LNBITS_MAIN_WALLET_INVOICE_KEY, LNBITS_MAIN_WALLET_ADMIN_KEY, LNBITS_WEBHOOK_URL
+from configs import PATH, LNBITS_HOST, LNBITS_BASE_URL, LNBITS_MAIN_WALLET_INVOICE_KEY, LNBITS_MAIN_WALLET_ADMIN_KEY, LNBITS_WEBHOOK_URL
+from os.path import exists
 from lnbits import Lnbits
+from json import loads, load, dump
+from re import search
+
+import requests
+import logging
+import sys
+
+if not (LNBITS_MAIN_WALLET_INVOICE_KEY):
+    if not exists(PATH + "/wallet.json"):
+        try:
+            location = requests.get(f"{LNBITS_BASE_URL}/wallet?nme=default", allow_redirects=False).headers["Location"]
+            wallet_keys = loads(search(r"window\.wallet = ({.*});", requests.get(f"{LNBITS_BASE_URL}{location}").text).group(1))
+        except:
+            logging.critical("Unable to connect with Lnbits.")
+            logging.critical("Exit")
+            sys.exit(0)
+
+        LNBITS_MAIN_WALLET_ADMIN_KEY = wallet_keys["adminkey"]
+        LNBITS_MAIN_WALLET_INVOICE_KEY = wallet_keys["inkey"]    
+        with open(PATH + "/wallet.json", "w") as w:
+            wallet = {"LNBITS_MAIN_WALLET_ADMIN_KEY": LNBITS_MAIN_WALLET_ADMIN_KEY, "LNBITS_MAIN_WALLET_INVOICE_KEY": LNBITS_MAIN_WALLET_INVOICE_KEY}
+            dump(wallet, w)
+    else:
+        wallet = load(open(PATH + "/wallet.json"))
+        LNBITS_MAIN_WALLET_ADMIN_KEY = wallet["LNBITS_MAIN_WALLET_ADMIN_KEY"]
+        LNBITS_MAIN_WALLET_INVOICE_KEY = wallet["LNBITS_MAIN_WALLET_INVOICE_KEY"]
 
 lnbits = Lnbits(admin_key=LNBITS_MAIN_WALLET_ADMIN_KEY, invoice_key=LNBITS_MAIN_WALLET_INVOICE_KEY, url=LNBITS_HOST)
 
