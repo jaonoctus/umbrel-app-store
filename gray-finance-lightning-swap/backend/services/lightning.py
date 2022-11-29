@@ -9,7 +9,7 @@ import logging
 import sys
 
 if not (LNBITS_MAIN_WALLET_INVOICE_KEY):
-    if not exists(PATH + "/wallet.json"):
+    if exists(PATH + "/wallet.json"):
         wallet = load(open(PATH + "/wallet.json"))
     else:
         wallet = {}
