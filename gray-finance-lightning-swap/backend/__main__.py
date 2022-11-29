@@ -27,14 +27,6 @@ except:
     sys.exit(0)
 
 try:
-    get_wallet = lnbits.get_wallet()
-    print(dumps(get_wallet, indent=3))
-except:
-    logging.critical("Lnbits service unavailable.")
-    logging.critical("Exit")
-    sys.exit(0)
-
-try:
     redis.ping()
 except:
     logging.critical("Redis service unavailable.")
