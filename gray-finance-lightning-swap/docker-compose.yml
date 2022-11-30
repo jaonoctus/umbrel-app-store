@@ -17,10 +17,9 @@ services:
       - --appendonly yes
     volumes:
       - ${APP_DATA_DIR}/data/redis:/data
-
+  
   frontend:
-    image: lightning-swap-frontend:latest
-    build: ${APP_DATA_DIR}/frontend
+    image: grayfinance/lightning-swap-frontend:1.0.0
     environment:
       - VITE_TITLE=LN Swap
     networks:
