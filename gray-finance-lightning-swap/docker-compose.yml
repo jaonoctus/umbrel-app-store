@@ -32,8 +32,7 @@ services:
       - backend
     
   backend:
-    image: lightning-swap-backend:latest
-    build: ${APP_DATA_DIR}/backend
+    image: grayfinance/lightning-swap-backend:1.0.0
     ports:
       - 1536:1536
     environment:
