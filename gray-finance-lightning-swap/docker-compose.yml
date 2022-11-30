@@ -17,10 +17,9 @@ services:
       - --appendonly yes
     volumes:
       - ${APP_DATA_DIR}/data/redis:/data
-
+  
   frontend:
-    image: lightning-swap-frontend:latest
-    build: ${APP_DATA_DIR}/frontend
+    image: grayfinance/lightning-swap-frontend:1.0.0
     environment:
       - VITE_TITLE=LN Swap
     networks:
@@ -32,8 +31,7 @@ services:
       - backend
     
   backend:
-    image: lightning-swap-backend:latest
-    build: ${APP_DATA_DIR}/backend
+    image: grayfinance/lightning-swap-backend:1.0.0
     ports:
       - 1536:1536
     environment:
@@ -61,7 +59,6 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ${APP_DATA_DIR}/data/backend/database.db:/root/vinci/data/database.db
-      - ${APP_DATA_DIR}/backend:/app
       - ${APP_DATA_DIR}/.env:/root/vinci/.env
       - ${APP_DATA_DIR}/wallet.json:/root/vinci/data/wallet.json
     restart: on-failure
