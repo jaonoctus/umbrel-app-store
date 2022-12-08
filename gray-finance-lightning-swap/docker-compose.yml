@@ -19,7 +19,7 @@ services:
       - ${APP_DATA_DIR}/data/redis:/data
 
   frontend:
-    image: jaonoctus/lightning-swap-frontend:latest@sha256:8b83fede26b05299197fd20f6f34d79047db748581b975f071bf16ab841f6a19
+    image: jaonoctus/lightning-swap-frontend:latest@sha256:c361632ff1c0b0c535d908636454bbacd5002c82ff1edf82f6d7c7286c00386d
     environment:
       - VITE_TITLE=LN Swap
     networks:
