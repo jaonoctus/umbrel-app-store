@@ -7,19 +7,19 @@ services:
       APP_PORT: 5173
       PROXY_AUTH_ADD: "false"
 
-  redis:  
+  redis:
     image: redis:latest
-    command: 
+    command:
       - redis-server
       - redis.conf
-      - --requirepass 
+      - --requirepass
       - ${REDIS_PASS}
       - --appendonly yes
     volumes:
       - ${APP_DATA_DIR}/data/redis:/data
-  
+
   frontend:
-    image: grayfinance/lightning-swap-frontend:1.0.0
+    image: jaonoctus/lightning-swap-frontend:latest@sha256:8b83fede26b05299197fd20f6f34d79047db748581b975f071bf16ab841f6a19
     environment:
       - VITE_TITLE=LN Swap
     networks:
@@ -29,24 +29,24 @@ services:
     stop_grace_period: 1m
     depends_on:
       - backend
-    
+
   backend:
-    image: grayfinance/lightning-swap-backend:1.0.0
+    image: jaonoctus/lightning-swap-backend:latest@sha256:f4bb4a2ede828a9ee2598aa5298f23603cfe8c9565af0b0cc7240ab49c7de73b
     ports:
       - 1536:1536
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASS=${REDIS_PASS}
-      
+
       - LND_HOST=${LND_HOST}
       - LND_MACAROON=${LND_MACAROON}
-      
+
       - SWAP_SERVICE_FEERATE=${SWAP_SERVICE_FEERATE}
       - SWAP_MAX_AMOUNT=${SWAP_MAX_AMOUNT}
       - SWAP_MIN_AMOUNT=${SWAP_MIN_AMOUNT}
       - MIRRORS_TOR_URL=${MIRRORS_TOR_URL}
-      
+
       - LNBITS_HOST=${LNBITS_HOST}
       - LNBITS_BASE_URL=${LNBITS_BASE_URL}
       - LNBITS_WEBHOOK_URL=${LNBITS_WEBHOOK_URL}
@@ -65,7 +65,7 @@ services:
     stop_grace_period: 1m
     depends_on:
       - redis
-    
+
   tor:
     image: getumbrel/tor:0.4.7.8@sha256:2ace83f22501f58857fa9b403009f595137fa2e7986c4fda79d82a8119072b6a
     user: "1000:1000"
